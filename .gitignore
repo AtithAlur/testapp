@@ -1,0 +1,16 @@
+/.bundle
+**/.DS_Store
+
+# Ignore vim temp files
+*.swp
+*.swo
+
+
+# Ignore dev db file
+*.sql
+
+# vscode
+.vscode
+
+/data
+/backend/public/upload

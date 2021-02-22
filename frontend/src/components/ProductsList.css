@@ -1,0 +1,24 @@
+.ProductsList-image {
+  width: 250px !important;
+  height: 300px;
+  padding: 10px;
+}
+
+.ProductsList-card-deck {
+  display: block !important;
+}
+
+.ProductsList-card {
+  margin-bottom: 10px !important;
+}
+
+.ProductsList-bold {
+  font-weight: 600;
+  font-size: 16px;
+  padding-right: 8px;
+}
+
+.ProductsList-card-header {
+  font-weight: 600;
+  font-size: 18px;
+}

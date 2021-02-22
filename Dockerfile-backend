@@ -1,0 +1,8 @@
+FROM ruby:3
+
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN gem install bundle
+
+WORKDIR /app
+
+ENTRYPOINT ["/app/entrypoint.sh"]

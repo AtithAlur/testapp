@@ -1,0 +1,27 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  padding: 10px 20px;
+  color: rgb(43, 153, 226);
+  font-size: 25px;
+}
+
+.App-logo:hover {
+  color: #3981b4 !important;
+  text-decoration: none;
+}
+
+.App-header {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: left;
+  font-size: calc(10px + 2vmin);
+  color: #000;
+  border-bottom: rgb(43, 153, 226) 1px solid;
+  height: 70px;
+  margin-bottom: 50px;
+}

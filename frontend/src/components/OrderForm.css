@@ -1,0 +1,22 @@
+.OrderForm-card {
+  margin-bottom: 10px !important;
+}
+
+.OrderForm-buttons {
+  text-align: center;
+}
+
+.OrderForm-buttons button {
+  margin: 5px;
+}
+
+.OrderForm-bold {
+  font-weight: 600;
+  font-size: 16px;
+  padding-right: 8px;
+}
+
+.OrderForm-card-header {
+  font-weight: 600;
+  font-size: 18px;
+}
