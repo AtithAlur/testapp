@@ -66,4 +66,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.hosts << 'backend'
   config.hosts << 'localhost'
+  config.hosts << 'ec2-18-222-92-54.us-east-2.compute.amazonaws.com'
 end
