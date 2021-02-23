@@ -71,6 +71,18 @@
 * data - Volume mount for the db container
 * docs - Documents
 * frontend
+  * src
+    * components - Custom components
+      * Home.tsx - Home component
+      * ProductsList.tsx - To display list of products in the home page
+      * ProductDetails.tsx - To display a single product details
+      * Checkout.tsx - The checkout page component
+      * OrderForm.tsx - Component for the checkout page form
+    * actions - Common functions
+      * backend.tsx - Functions to interact with backend
+    * data
+      * states.tsx - US state details
+    * types - Custom types
 * nginx
   * nginx.config - Nginx config file to setup proxy for the frontend and backend applications
 * docker-compose.yml
@@ -136,6 +148,83 @@
   * quantity - Ordered qunatity
   * sub_total - Order sub total = quantity * price
 
+### Design Details
 
+* On every create requests (API and UI), the application creates a new user if doesn't exist prior
+* Same with credit card and addresses. The logic look creates new records only if they doesn't exist for the user
+* This supports multiple orders from a user, capped by the order limit(3)
+* entries in the order_products table manage multiple orders for a user
+* I have created indexes whever required
 
+## Frontend Design
 
+* Even though a single page was requested, I have created multiple pages for a better user experience, and for the feature scalability
+* This design is useful if we need a checkout flow experience
+* It also supports multiple products in the store
+* I have used typescript and the following additional libraries:
+  * axios
+  * react-router-dom
+  * formik
+  * bootstrap
+  * yup
+
+## Backend Design
+
+### APIs
+
+* POST /api/magic - Creates order
+* PATCH /api/magic - Updates the order (Only fulfilled)
+* DELETE /api/magic/:uid - Deletes an order
+* GET /api/magic/:uid - Return an order details
+* GET /api/products - Returns all the products in the store
+
+### Storage
+
+* Currently storing the images in the docker container
+
+## Web Server
+
+* Acts as a loadbalancer and proxy
+* Forwards all the `/` requests to frontend app running on frontend:3000
+* Forwards all the `/api` requests to frontend app running on backend:3000
+
+## Question & Answers
+
+* **Describe your data schema and how it relates to the purchasing of magic potions.**
+  * Answered in the above design details
+* **Describe how this could scale over time.**
+  * Functionality:
+    * My solution supports multiple products
+    * Multiple orders per user
+    * Can easily integerate the user management
+    * Can esily build the cart/checkout flow
+  * Code:
+    * React and typescript on the frontend help easy addition of new components
+    * Rails is known for Time To Market, we can build and deploy new endpoints quickly and optimally
+  * Infrastructure:
+    * Containers are scalable friendly, it's just a matter of spinning new containers or setup an autoscalability to scale as per the need
+    * Many application servers that host Rails application can manage concurrent request pretty well, so scaling horizontally cannot be an issue
+  * Database:
+    * The current design can handle good enough order requests optimially, and can accomodate new indexes for the slow queries
+    * Relation database though cannot be scaled horizontally, but they are good enough to handle huge transactions, and data
+    * Plus, relational tables support transactions that can used to prevent currupt data
+* **Describe your front end architecture and why you chose to create it as you did. Include details about form validation, error handling etc.**
+  * I chose react because, it's component based, it supports routing, navigation, and state management pretty well compared to other frameworks
+  * Typescript helps to keep code DRY, and it helps to identify the issues statically, rather than dealing with issues during the runtime. It saves the developement/maintenance time
+  * I have used `Formik` and `Yup` for form validations, and error handling. These are good libraries that provides most of the common required features, and reduces the boilerplate code
+* **Describe the API architecture**
+  * Discussed earlier
+* **With more time or in a different environment, what would you do differently?**
+  * With more time, I would have made my test suite stronger, both in the frontend and the backend applications
+  * With a better test suite, we can deploy new features with more confidence, and less issues
+  * I could have used some of the cloud services like S3 for image storage, a proper logging tool, a monitoring tool integration.
+  * I could have made it more secured by building some OAuth flow, for both UI and the APIs
+  * I could have made communications secured over https
+  * I could have done a performance test of my application, which gives us an idea about the scalability needs
+* **What would you do to improve or scale the application?**
+  * Most of it is covered in the previous notes
+  * The scalability requirements are based on the application growth
+  * We need a proper set of tools in-place to understand the application performance - CPU utilization, Memomory consumption, how it grows with the throughput
+  * A proper logging to troubleshoot the issues
+  * If database is the bottleneck we need to explore other databases like Cassandra, MongoDB, etc. those are good with the horizontal scaling.
+  * We need to track the DB connections, no of reads/writes, DB CPU utilization, I/O read and writes. All these information helps us to be prepared to grow when the need arise
