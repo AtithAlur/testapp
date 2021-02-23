@@ -2,4 +2,6 @@
 
 class Stock < ApplicationRecord
   belongs_to :product
+
+  validates :product, :quantity, presence: true
 end

@@ -21,7 +21,7 @@ class Order < ApplicationRecord
   validates :status, inclusion: { in: statuses.keys }
   validates_associated :address, :credit_card
 
-  validate :validate_order_limits, :validate_total, :on => :create
+  validate :validate_order_limits, :validate_total, on: :create
 
   def self.create_order!(user, attrs)
     address_attrs = attrs.delete(:address)

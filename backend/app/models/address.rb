@@ -6,6 +6,7 @@ class Address < ApplicationRecord
   belongs_to :user
 
   validates :address_line1, :city, :state, :zip, presence: true
+  validates :address_line1, uniqueness: true
 
   def as_json(_options = {})
     {

@@ -15,7 +15,7 @@ class Product < ApplicationRecord
 
   scope :find_magic_potion!, -> { find_by!(name: MAGIC_POTION) }
 
-  def as_json(options = {})
+  def as_json(_options = {})
     {
       uuid: uuid,
       name: name,

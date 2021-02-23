@@ -20,13 +20,23 @@ class CreditCard < ApplicationRecord
   private
 
   def validate_expiry
-    errors.add(:expiry, :expired, message: 'Card is expired!') if Date.strptime(expiry, '%d/%Y') < Time.now
+    return if expiry.nil?
+
+    date = begin
+      Date.strptime(expiry, '%m/%Y')
+    rescue StandardError
+      nil
+    end
+    errors.add(:expiry, :invalid, message: 'is invalid!') && return if date.blank?
+
+    errors.add(:expiry, :expired, message: 'card is expired!') if date < Time.now
   end
 
   def validate_card_number_length
+    return if card_number.nil?
     return if card_number.length == 16 || card_number.length == 20
 
     errors.add(:card_number, :invalid_length,
-               message: 'Credit number should be either 16 or 20 digits.')
+               message: 'should be either 16 or 20 digits.')
   end
 end

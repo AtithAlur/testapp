@@ -6,7 +6,7 @@ class OrderProduct < ApplicationRecord
   belongs_to :price
 
   validates :product, :order, :price, :quantity, :sub_total, presence: true
-  validates :product, uniqueness: { scope: :order }
+  validates :product_id, uniqueness: { scope: :order_id }
   validates :quantity, :sub_total, numericality: { greater_than: 0 }
 
   def self.build_products(products)
