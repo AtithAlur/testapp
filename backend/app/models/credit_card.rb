@@ -5,7 +5,7 @@ class CreditCard < ApplicationRecord
 
   belongs_to :user
 
-  validates :card_number, presence: true, uniqueness: true
+  validates :card_number, presence: true, uniqueness: { scope: :user_id }
   validates :expiry, presence: true, length: { is: 7 }
 
   validate :validate_card_number_length, :validate_expiry

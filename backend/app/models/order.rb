@@ -28,7 +28,7 @@ class Order < ApplicationRecord
     credit_card_attrs = attrs.delete(:credit_card)
     product_attrs = attrs[:products]
 
-    address = User.find_or_initialize_address(user, address_attrs)
+    p address = User.find_or_initialize_address(user, address_attrs)
     credit_card = User.find_or_initialize_credit_card(user, credit_card_attrs)
     order_products = OrderProduct.build_products(product_attrs)
 

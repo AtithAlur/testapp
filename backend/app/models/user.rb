@@ -17,7 +17,9 @@ class User < ApplicationRecord
   end
 
   def self.find_or_initialize_address(user, address_attrs)
-    address = user.addresses.find_by(address_line1: address_attrs[:address_line1])
+    p '///////'
+    p address_attrs[:address_line1]
+    p address = user.addresses.find_by(address_line1: address_attrs[:address_line1])
     return address if address.present?
 
     Address.new(address_attrs.merge(user: user))
