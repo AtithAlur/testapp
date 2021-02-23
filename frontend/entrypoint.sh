@@ -1,5 +1,8 @@
 #!/bin/bash
 
-bundle install
+# Install dependencies
+yarn install
 
-tail -f /dev/null
+# Starts react server
+yarn start
+
