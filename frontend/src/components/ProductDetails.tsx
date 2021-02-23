@@ -51,7 +51,7 @@ class ProductDetails extends React.Component<RouteComponentProps<Product>, Produ
                   <Col lg={3} md={3}>
                     <Card.Img className='ProductDetails-image' src= {product.imageUrl} />
                   </Col>
-                  <Col>
+                  <Col lg={6} md={6}>
                     <Row>
                       <Col>
                         <span className={'ProductDetails-bold'}>Price:</span>{product.price}
@@ -87,6 +87,15 @@ class ProductDetails extends React.Component<RouteComponentProps<Product>, Produ
                         {product.description}
                       </Col>
                     </Row>
+                  </Col>
+                  <Col lg={3} md={3}>
+                    <Card.Body className='ProductDetails-summary'>
+                    <Row>
+                      <Col>
+                        <span className={'ProductDetails-bold'}>Order Total:</span>{Number(product.price) * this.state.quantity}
+                      </Col>
+                    </Row>
+                    </Card.Body>
                   </Col>
                 </Row>
               </Card>
