@@ -7,7 +7,8 @@ bundle install
 rails db:migrate
 
 # Run tests
-rspec
+RAILS_ENV=test rails db:drop db:create db:migrate
+RAILS_ENV=test rspec
 
 # Creates Magic Potion product
 rails db:seed

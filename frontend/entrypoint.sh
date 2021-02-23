@@ -5,4 +5,3 @@ yarn install
 
 # Starts react server
 yarn start
-

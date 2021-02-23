@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2021_02_17_051952) do
     t.string "zip", limit: 10
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["address_line1"], name: "index_addresses_on_address_line1"
     t.index ["uuid"], name: "index_addresses_on_uuid"
   end
 
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_02_17_051952) do
     t.string "expiry", limit: 7
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_number"], name: "index_credit_cards_on_card_number"
     t.index ["uuid"], name: "index_credit_cards_on_uuid"
   end
 
