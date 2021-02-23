@@ -5,7 +5,7 @@ class CreateCreditCards < ActiveRecord::Migration[6.1]
     create_table :credit_cards do |t|
       t.uuid :uuid, index: true
       t.integer :user_id
-      t.string :card_number, limit: 20
+      t.string :card_number, limit: 20, index: true
       t.column :expiry, 'char(7)'
 
       t.timestamps
